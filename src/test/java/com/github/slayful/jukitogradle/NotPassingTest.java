@@ -14,15 +14,12 @@ public class NotPassingTest {
   public void sayHello(@All("any-name") Anything sut) {
     assertEquals("Hello, World!", sut.sayHello());
   }
-  @Test
-  public void sayBello(@All("any-name") Anything sut) {
-    assertEquals("Hello, World!", sut.sayHello());
-  }
 
   public static class Module extends JukitoModule {
 
     @Override
     protected void configureTest() {
+      // at least two instances need to be bound
       bindManyNamedInstances(Anything.class, "any-name", new PoliteAnything(), new PoliteAnything());
     }
   }
